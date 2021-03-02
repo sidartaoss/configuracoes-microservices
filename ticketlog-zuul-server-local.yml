@@ -1,0 +1,52 @@
+server:
+  port: 9093
+  
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: WARN
+
+eureka:   
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+
+management:
+  security:
+    enabled: false  
+  endpoints:
+    web:
+      exposure:
+        include: "*"  
+  endpoint:
+    health:
+      show-details: ALWAYS    
+    
+zuul:
+  sensitive-headers: 
+    - Cookie 
+    - Set-Cookie    
+  ribbonIsolationStrategy: THREAD
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+        timeout:
+          enabled: false
+
+ribbon:
+  ConnectTimeout: 40000
+  ReadTimeout: 40000
+
+spring:
+    servlet:
+        multipart:
+            max-file-size: 10MB
+            max-request-size: 10MB
+
+
